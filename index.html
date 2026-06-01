@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz — Filme Stretch | Cazan Transportes</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black:   #111111;
+  --black2:  #1A1A1A;
+  --black3:  #222222;
+  --yellow:  #F5B800;
+  --yellow2: #FFCA28;
+  --yellow3: #FFE082;
+  --gray-dk: #2A2A2A;
+  --gray-md: #3A3A3A;
+  --gray-lt: #4A4A4A;
+  --gray-bg: #F4F4F4;
+  --gray-bd: #DDDDDD;
+  --white:   #FFFFFF;
+  --green:   #27AE60;
+  --green-lt:#E8F8EE;
+  --red:     #C0392B;
+  --red-lt:  #FDE8E8;
+  --mid:     #888888;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--black);
+  font-family:'Barlow',sans-serif;
+  font-size:17px;
+  color:var(--white);
+  min-height:100vh;
+  line-height:1.6;
+}
+
+/* ── HEADER ── */
+.site-header{
+  background:var(--black);
+  border-bottom:3px solid var(--yellow);
+  padding:0 40px;
+  display:flex;align-items:center;justify-content:space-between;
+  height:64px;
+  position:sticky;top:0;z-index:100;
+}
+.logo{
+  display:flex;align-items:center;gap:12px;
+}
+.logo-text{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:1.4rem;font-weight:800;line-height:1.1;
+}
+.logo-text span{color:var(--yellow);}
+.logo-badge{
+  background:var(--yellow);color:var(--black);
+  font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:3px 10px;border-radius:4px;
+}
+.header-right{
+  font-size:.85rem;color:var(--white);
+  text-align:right;line-height:1.4;
+}
+
+/* ── HERO ── */
+.hero{
+  background:linear-gradient(135deg,var(--black) 0%,var(--black3) 100%);
+  padding:64px 40px 56px;
+  text-align:center;
+  position:relative;overflow:hidden;
+  border-bottom:4px solid var(--yellow);
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 70% at 80% 50%,rgba(245,184,0,.07) 0%,transparent 60%);
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(245,184,0,.12);border:1px solid rgba(245,184,0,.3);
+  color:var(--yellow);font-size:.75rem;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  padding:6px 18px;border-radius:4px;margin-bottom:24px;position:relative;
+}
+.hero h1{
+  font-family:'Barlow Condensed',sans-serif;font-weight:800;
+  font-size:clamp(2.4rem,6vw,4.8rem);
+  line-height:1;margin-bottom:12px;position:relative;
+  text-transform:uppercase;letter-spacing:.02em;
+}
+.hero h1 .yellow{color:var(--yellow);}
+.hero-sub{color:var(--white);font-size:1.1rem;position:relative;margin-bottom:0;}
+
+/* ── START SCREEN ── */
+#startScreen{
+  max-width:700px;margin:48px auto;padding:0 20px;
+}
+.start-card{
+  background:var(--black2);border:1px solid var(--gray-md);border-top:4px solid var(--yellow);
+  border-radius:8px;overflow:hidden;
+}
+.start-top{padding:36px 40px;border-bottom:1px solid var(--gray-md);}
+.start-top h2{
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.8rem;
+  color:var(--yellow);text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px;
+}
+.start-top p{color:var(--white);font-size:1.05rem;line-height:1.6;}
+.start-body{padding:32px 40px;}
+.start-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px;}
+.ss-item{
+  background:var(--black3);border:1px solid var(--gray-md);
+  border-top:3px solid var(--yellow);
+  text-align:center;padding:18px 8px;border-radius:6px;
+}
+.ss-val{
+  font-family:'Barlow Condensed',sans-serif;font-weight:800;
+  font-size:2.4rem;color:var(--yellow);line-height:1;
+}
+.ss-lbl{font-size:.82rem;color:var(--white);margin-top:4px;letter-spacing:.06em;text-transform:uppercase;}
+.topics{display:flex;flex-direction:column;gap:8px;margin-bottom:32px;}
+.topic-item{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 14px;background:var(--black3);border-radius:6px;
+  font-size:1rem;color:var(--white);border-left:3px solid var(--yellow);
+}
+.topic-item::before{content:'›';color:var(--yellow);font-weight:700;font-size:1.1rem;}
+.btn-start{
+  width:100%;padding:16px;border-radius:6px;
+  background:var(--yellow);color:var(--black);
+  font-family:'Barlow Condensed',sans-serif;font-size:1.2rem;font-weight:800;
+  letter-spacing:.08em;text-transform:uppercase;
+  border:none;cursor:pointer;transition:all .2s;
+}
+.btn-start:hover{background:var(--yellow2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(245,184,0,.3);}
+
+/* ── PROGRESS ── */
+#progressBar{display:none;position:sticky;top:64px;z-index:99;background:var(--black2);border-bottom:1px solid var(--gray-md);}
+.prog-inner{
+  max-width:860px;margin:0 auto;padding:14px 24px;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
+}
+.prog-label{font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:700;color:var(--yellow);letter-spacing:.04em;text-transform:uppercase;}
+.prog-right{display:flex;align-items:center;gap:16px;}
+.prog-score{font-size:.95rem;color:var(--white);}
+.prog-score strong{color:var(--yellow);font-size:1.05rem;}
+.prog-dots{display:flex;gap:4px;flex-wrap:wrap;max-width:320px;}
+.prog-dot{width:10px;height:10px;border-radius:2px;background:var(--gray-md);transition:all .3s;flex-shrink:0;}
+.prog-dot.ok{background:var(--green);}
+.prog-dot.no{background:var(--red);}
+.prog-dot.cur{background:var(--yellow);transform:scale(1.2);}
+.prog-bar-strip{height:3px;background:var(--gray-md);}
+.prog-bar-fill{height:100%;background:var(--yellow);transition:width .5s;}
+
+/* ── QUESTION ── */
+#quizMain{display:none;max-width:860px;margin:40px auto;padding:0 20px 80px;}
+.q-card{
+  background:var(--black2);border:1px solid var(--gray-md);
+  border-top:4px solid var(--yellow);border-radius:8px;overflow:hidden;
+}
+.q-top{
+  background:var(--black3);padding:28px 36px;
+  border-bottom:1px solid var(--gray-md);
+}
+.q-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+.q-num{
+  font-family:'Barlow Condensed',sans-serif;font-size:.85rem;font-weight:700;
+  color:var(--yellow);letter-spacing:.14em;text-transform:uppercase;
+}
+.q-cat{
+  font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  background:rgba(245,184,0,.1);color:var(--yellow);
+  border:1px solid rgba(245,184,0,.25);
+  padding:4px 12px;border-radius:4px;
+}
+.q-text{
+  font-family:'Barlow',sans-serif;font-weight:600;
+  font-size:clamp(1.1rem,2.5vw,1.4rem);
+  color:var(--white);line-height:1.45;
+}
+.q-body{padding:28px 36px;}
+.options{display:flex;flex-direction:column;gap:10px;}
+.opt{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:14px 18px;border-radius:6px;
+  border:1.5px solid var(--gray-md);
+  background:var(--black3);
+  cursor:pointer;transition:all .2s;user-select:none;
+}
+.opt:hover:not(.disabled){
+  border-color:var(--yellow);
+  background:rgba(245,184,0,.06);
+}
+.opt-let{
+  width:32px;height:32px;border-radius:4px;flex-shrink:0;
+  background:var(--gray-md);color:var(--mid);
+  font-family:'Barlow Condensed',sans-serif;font-size:.9rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s;
+}
+.opt-txt{font-size:1.05rem;color:var(--white);line-height:1.45;padding-top:4px;}
+.opt.sel{border-color:var(--yellow);background:rgba(245,184,0,.08);}
+.opt.sel .opt-let{background:var(--yellow);color:var(--black);}
+.opt.correct{border-color:var(--green);background:rgba(39,174,96,.1);}
+.opt.correct .opt-let{background:var(--green);color:var(--white);}
+.opt.wrong{border-color:var(--red);background:rgba(192,57,43,.1);}
+.opt.wrong .opt-let{background:var(--red);color:var(--white);}
+.opt.reveal{border-color:rgba(39,174,96,.25);background:rgba(39,174,96,.04);}
+.opt.reveal .opt-let{background:rgba(39,174,96,.15);color:var(--green);}
+.opt.disabled{cursor:default;}
+
+/* feedback */
+.fb{
+  margin-top:20px;padding:16px 18px;border-radius:6px;
+  display:none;align-items:flex-start;gap:12px;
+}
+.fb.show{display:flex;}
+.fb.fb-ok{background:rgba(39,174,96,.12);border-left:4px solid var(--green);}
+.fb.fb-no{background:rgba(192,57,43,.1);border-left:4px solid var(--red);}
+.fb-icon{font-size:1.2rem;flex-shrink:0;margin-top:1px;}
+.fb-txt{font-size:1rem;color:var(--white);line-height:1.6;}
+.fb-txt strong{color:var(--yellow);}
+
+/* actions */
+.q-actions{
+  padding:18px 36px 28px;
+  display:flex;justify-content:flex-end;gap:12px;
+  border-top:1px solid var(--gray-md);
+}
+.btn-check{
+  padding:12px 28px;border-radius:6px;
+  background:var(--yellow);color:var(--black);
+  font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:800;
+  letter-spacing:.06em;text-transform:uppercase;
+  border:none;cursor:pointer;transition:all .2s;
+}
+.btn-check:hover{background:var(--yellow2);transform:translateY(-1px);}
+.btn-check:disabled{background:var(--gray-md);color:var(--mid);cursor:not-allowed;transform:none;}
+.btn-next{
+  padding:12px 28px;border-radius:6px;
+  background:transparent;color:var(--yellow);
+  border:1.5px solid var(--yellow);
+  font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:800;
+  letter-spacing:.06em;text-transform:uppercase;
+  cursor:pointer;transition:all .2s;
+  display:none;align-items:center;gap:8px;
+}
+.btn-next:hover{background:rgba(245,184,0,.1);}
+.btn-next.show{display:inline-flex;}
+
+/* ── RESULT ── */
+#resultScreen{display:none;max-width:860px;margin:40px auto;padding:0 20px 80px;}
+.result-card{
+  background:var(--black2);border:1px solid var(--gray-md);
+  border-top:4px solid var(--yellow);border-radius:8px;
+  padding:56px 40px;text-align:center;
+}
+.result-medal{font-size:5rem;display:block;margin-bottom:20px;animation:pop .6s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+.result-score{
+  font-family:'Barlow Condensed',sans-serif;font-weight:800;
+  font-size:5rem;color:var(--yellow);line-height:1;margin-bottom:4px;
+}
+.result-pct{color:var(--mid);font-size:1rem;margin-bottom:28px;}
+.result-status-ok{color:var(--green);font-weight:700;}
+.result-status-no{color:var(--red);font-weight:700;}
+.result-msg{
+  font-size:1.05rem;color:var(--white);max-width:520px;margin:0 auto 40px;line-height:1.6;
+}
+.result-stats{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+  max-width:480px;margin:0 auto 40px;
+}
+.rs-item{
+  background:var(--black3);border:1px solid var(--gray-md);
+  border-radius:6px;padding:20px 8px;text-align:center;
+}
+.ok-item{border-top:3px solid var(--green);}
+.no-item{border-top:3px solid var(--red);}
+.pt-item{border-top:3px solid var(--yellow);}
+.rs-val{
+  font-family:'Barlow Condensed',sans-serif;font-weight:800;
+  font-size:2.4rem;line-height:1;
+}
+.ok-item .rs-val{color:var(--green);}
+.no-item .rs-val{color:var(--red);}
+.pt-item .rs-val{color:var(--yellow);}
+.rs-lbl{font-size:.82rem;color:var(--white);margin-top:4px;letter-spacing:.06em;text-transform:uppercase;}
+.btn-restart{
+  padding:14px 40px;border-radius:6px;
+  background:var(--yellow);color:var(--black);
+  font-family:'Barlow Condensed',sans-serif;font-size:1.05rem;font-weight:800;
+  letter-spacing:.06em;text-transform:uppercase;
+  border:none;cursor:pointer;transition:all .2s;margin-bottom:40px;
+}
+.btn-restart:hover{background:var(--yellow2);transform:translateY(-2px);}
+.review-wrap{text-align:left;margin-top:10px;}
+.review-lbl{
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.1rem;
+  color:var(--yellow);text-transform:uppercase;letter-spacing:.06em;
+  margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--gray-md);
+}
+.rev-item{
+  padding:14px 18px;border-radius:6px;margin-bottom:10px;
+  border-left:4px solid;
+}
+.rev-item.ok{background:rgba(39,174,96,.07);border-color:var(--green);}
+.rev-item.no{background:rgba(192,57,43,.07);border-color:var(--red);}
+.rev-cat{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--yellow);margin-bottom:4px;}
+.rev-q{font-size:1rem;font-weight:600;color:var(--white);margin-bottom:6px;line-height:1.4;}
+.rev-a{font-size:.95rem;color:var(--white);line-height:1.5;}
+.rev-ok{color:var(--green);font-weight:600;}
+.rev-no{color:var(--red);font-weight:600;}
+
+/* ── FOOTER ── */
+footer{
+  text-align:center;padding:32px 20px;
+  border-top:1px solid var(--gray-md);
+  font-size:.88rem;color:var(--white);line-height:1.8;
+}
+footer strong{color:var(--white);}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="logo">
+    <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCACfAToDASIAAhEBAxEB/8QAHQABAAIDAQEBAQAAAAAAAAAAAAgJBQYHBAMCAf/EAFkQAAEDAwICBQUGDg4IBwAAAAEAAgMEBQYHERIhCBMxQVEiYXGBkRQyN3WhsxUYIzZSc4KUorHB0dLTFhc1QkNTVFZicpKywsMkJ0ZjZXSEoyUzNFVkg/D/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AjiiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICL22iz3a8VAp7Ta664THsjpad0rj6mglbvb9D9WK+MSQYRcmAjfacshPse4FBztF1RnR41ic3cYc4em4Uo/wAxfZnRy1fcNzi8bfMbhT/keg5Ki6JnGi2oWGY5JkGQWmGnoIntY9zKqOQtLjsNw0nluudoCIiAiIgIiICLqOnGhWc55jMeQ2T6GsopJHxs901BY5xadidg08t1sn0q+p/8ZYvvx36CDhSLuv0q+p/8ZYvvx36CfSr6n/xli+/HfoIOFIuh6qaQZRptbaOuyOptW1ZMYoIqeoL5HbDdzti0eSOW58XBc8QEREBERAREQEREBERAREQEREBERAREQEREH6iY+WRscbHPe8hrWtG5JPYAFKvQroywSUtLkGorHkvAkitDH8IAPZ1zhz37+EEec9oWN6FWmMNzrJNQb3SCSnpJDFbGSN3a+Ue+l2Pbw77A/Zb97VL5B4bJZ7TZKJtFZ7bSUFM0bCOniDG+wL3IiAiIg1DWewHJ9LcisrI+smmoZHQt7zI0cTQPSQB61WqrWVWprPj4xjVLIrKyPq4Ya6R0DduQjceJgHoBA9SDUUREBERAQAkgAbk9iLO6ettZzmym91TKW2trYn1UrwS1sYcCdwOfcgsP0cx39iml+PWFzOCanomGcf71w45PwnFbaubt1z0m2AGaUAA7PJkH+FfZmtmlTxuM3tY9L3D8YQdCRa5iWd4hllTNTY3kFDc5oWccrIH8RY3fbcr1ZxV3WhxG6VNiopK26Npn+44GbbvlI2b28uR5+pBCTpf5iMo1ZqKCmm6yisjTRR7HkZAd5SPuvJ+5XGl0ir0T1bfM+efDblJJI4ue4FjiSTuSdnLUsvxLI8Rq4aTJLTUWyedhkjjmADnN323237N0GEREQEREBERAREQEREBERAREQEREBERAX6hjfNMyGMFz3uDWgd5J2C/K2/RW3sumrmJ0UjQ6N92py9p72tkDiPYCgsL05x+HFcFs2PQsDRRUjI3bd79t3n1uJKz6IgLjGvuvFp04k+g1sp47rkLmhzoS4iKmaewyEcyT3NHrI5b9Uyy8Q49i90vtQ3iioKSSoc3f33A0nb17bKsfIbtXX6+Vt5ucxmrK2Z00zz3ucd/Z4BB1yr6Tuqc1Q6SKstlOw9kbKNpA9pJXmd0lNWCf3Zox6KKP8y48iDrrukfq0T+78A9FFF+Zb3p/ozlmsVwGe6k3N9FTVcbOqEULWVFUwDZrtgA1jdttjsSfDvXN+jHg0Od6p0lHXwddbKCM1tY1w3a9rSA1h/rOIG3hurCGta1oa0BrQNgAOQCDk9t6OuklHAIpMadWOA5yT1k3Ef7LgPkXr/aA0h/mZT/fdR+sXTkQcy/aB0h/mXTffU/6a/TdBdI29mF0nrqJj/jXS0QcH1r0f01sek+SXa04nR0tdS0L5IJmvkJY4bcxu4qDysb6RHwIZd8Wv/Iq5EBEW46L4bLnmo9px4BwppZRJWPb2sgbzefSRyHnIQS66HWDDFtMmXqrj4blfXCofuObIRyjb6xu77rzLtg8qQ+DeXrX4ghho6OOCCNscMEYZGxo2DWgbAD1L9xt4WAHt7T6UCR7I43SSOaxjQXOc47AAdpKri14zM53qfdb5HIX0Qk9z0W/8SzcNI8N+bvulLzpc5uzEtKqigp5wy5XwmjgaD5XV7fVXegNIHpeFAlAREQEREBERAREQEREBERAREQEREBERAW99HuZkGtuIveQAbnEz1uPCPlK0RZLFLm+y5TabzF7+grYalvpY8OH4kFo6L5000VTTRVELg+KVgexw72kbgr6INB6RIlOiOWCHfj+h7uzw3G/ybquRWi5fZ48gxW62OVwayvo5aYuP73jaQD6id1WDcqKpt1xqbfWROhqaaV0M0bu1r2kgj2hB8EREEt+gDQxNtGV3LgBlkqKeAO8Gta92w9bvkClEordAG5w+58rsznATB9PVMb3ubs9rj6jw+1SpQYDUbJqbDcHu+TVQDo6CnMjWb7cbz5LG+txaPWq8cr1HzbJbtPcrlkly45XEiOKpfHGwfYta0gAKbXSxoamv0EyOOla5z4mwTuaO9jJmOd7ACfUq+UElegtcrhW6j3tlZXVVS0WgkCWZzwD10fiVMRQv6BR/wBZt7H/AAZ3z0Smgg0HpEfAhl3xa/8AIq5FY30iPgQy74tf+RVyICmR0HMGFsxatzetj/0q6O6ikDh7yBh5uH9Z3yMHiooYPjtZlmXWzHaAfV6+obEHbbhgJ8px8wG59Sswxy0UWP2Chsluj6ujoYGQQt7+Fo23PnPafOg9knlSNZ3Dyj+T5fxL6L50/lAyntedx6O7/wDedaF0hc1jwXS26XVkwjrqhvuShG/N0zwQCP6o4nfcoIg9K3Nm5jqvWR0k3W260b0NMQd2uc0/VHD0u3594AXJUcS5xc4kknck962bSzEanOc8teM0zjGKub6tKBv1UQ5vd6mg7efZBn9HtHsr1LnfLbI2UdrifwTV9QCIwfsWjte7zDs79lIuxdErCKelaLxfr5X1O3lOgdHBHv5mlrj+Eu845Zrbj1jpLLaKZlNRUkQjijaOwDvPiT2k+KyCDhA6KmmP8oyH78Z+rX9HRW0xH8NkB/6xn6C7siDhreizpcO0Xx3prR+isbl3Rq00tmK3a5Usd36+lo5Zo+Ks3HE1hI3HD4hSEWB1E+sHIPi2o+bcgrEUruj3oXgGa6WW7Ib7TV766oklbI6KrcxuzXkDkPMFFFT86H/wD2b7bUfOuQeH6WDSn+RXX7+d+ZPpYNKf5Fdfv535l2tEHFPpYNKf5Fdfv535ljL70UtPKymc21197tlRt5D+vbKwHztc3c+pwXfkQV4606NZNplNHUVro7haJn8ENfA0hvF3Ne0+9PtB8VzRWgZtj1BleKXHH7nCyWmrYHRkOHvXEeS4eBB2IPiFWTd6GW2Xart042lpZ3wv9LXEH8SDyoiICIiAiIgsP6M2VRZZo5ZanrQ+qoo/cNU3fm18fIb+lvA71rpShF0L8+ixrOpcZuM4ioL5wsic4+Sypb7z0cQJb6eFTdQFCzpn6bz2LLf2b26Hitd2dtVcI/8AIqAOe/meOYPiHebeaax2TWO15JYquyXqkjq6CrjMcsTx2jxB7iO0EcwRugq3Rdc100OyHTyvnr6KGW54448UVXG3d0I+xlA96R9l2HzHkORoOmdGTMIsM1dtlbVTCKhrQaGqcTs1rJCNifMHBp9SsNVUym50TdX6fK7BBh99qeG/2+MMgfI7/wBXC0ciD3vaBsR3jY8+ewd1ulFTXK21VurIxLTVULoZWHscxwII9hVdGtWnF203zCe11kT5LfK4voKsDyJo+7n3OHYR4jw2KsfWHzDGLDl1kls2Q22Cvo5f3kjebD3Oae1rh4jmgiH0DHf61rw3xsch/wC/B+dTUXI9JdDrTptn9dkdlvFTNR1VA+kFHURgujLpI38QkB5gcG2xHf2rriDQekR8CGXfFr/yKuRWN9Ij4EMu+LX/AJFXbaaCqul0pbbRRGWpqpWwxMH75zjsB8qCTnQVwZs1Zcc+royRADRW8EcuI7GR/qGzR/WcpX1O5aIgdjIeHcdw7/kWB00xWkwrBrVjVHsW0cAbJJtsZJDze8+lxJ+RZ2L6pUPk38lnkN/KfxD1IPsAANgNgFCPprZu2/6hRYxRT9ZR2NhbLwnyTUPAL/7I2b6d1LbVHK6XCcCu2S1TwPckBMLT/CSnlG0elxHyqtO5VlRcLhUV9XIZKipldLK8nm5zjuT7Sg+CkX0DbbHU6h3q5PaC6jtwaw94dI8D8TSo6KSPQIrY4s6yCgcQHVFuY9vn4JBy9jvkQTIXnulbTW221NxrJBHTU0TpZXn961o3J9gXoWma5Rzy6PZYymDjKbVPw8Pb70oIgah9IzUK/X+eaxXeWxWtriKamp2t4uHuL3EElx9g7lt3RP1CzfJtYIbff8oulxpDQzvME05LC4AbHh7Nwo1LtvQo+HCD4vqPxBBOxYHUT6wcg+Laj5tyzywOon1g5B8W1HzbkFYin50P/gHs322o+dcoBqfnQ/8AgHs322o+dcg66oydNvKslxytxtmP5BdLUJo5jKKOqfDx7Fu2/CRupNqJHT9P/i+LN/3E5/Cag5/pNrznuP5VQNvGQ1t4tE07GVcNc/rnBhIBc17vKBG+/bse9T3VVER2kafAhWroCrV1sY2PWDMGMaGtbeqsADu+quVlSrX1x5ayZj8dVXzrkGnIiICIiAiIg/UMkkMzJonuZIxwc1zTsQR2EKfnRn1Vg1FxJtJXysZkNujDKyPfnM0chMB4Hlv4H0hQBWXw/JLxiWQ0t+sVW6lrqZ27HDscO9rh3tPYQgtCRcy0O1jx/Uu2NiZJHQX6KMGpt738z4vj3983f1jcb+fpqD+PY17HMe0Oa4bOaRuCPBcgzjo56a5NNJUwW+Wx1TySX25wYzfx6sgt9gC7AiCJt26IFSJS605xE+M9jKmgLSPumvO/sC5Bq5p7c9HcktEQySGousjPdkb6Nr43U4a7ZjuI89yQ7bb7FWIqvvpX336O633otfxRUPBRR+A4B5X4Rcg7Pop0nqGrp4rNqJtSVTdmx3SNu8cv2xo96fOOR83fJO1XGgutBFX2ytp62kmHFHNBIHscPMRyVWCzeK5dk2K1Bnx2+V9tc47uEExa13pb2H1hBZ8irufrpqu7/bOuHoawf4V8/wBvDVf+e1y/A/Mgmv0iPgQy74tf+RRm6E2DNvueT5ZXRF1HY2/UARydUv5N/st4j6eFc0vereo96tNTarrltfVUVUwxzwvLeF7T3HkvpgOrmdYNZ3WnGrpDSUjpTK5hpY3lzzsCSXAnuCCxqpkMULnNALuxoPeT2L+wRiKJse5dsOZPee8qP/RQzPUPUOout4yq6xVFnoeGGCJtJHGZKg8yeJoB2a3u8XjwUg0ERunVm7am6W3BKKbibSAVleGnkJHD6m0+cNJd90FF9WS3zSnTu+XWout2xO31lbUv45ppA4uefE814f2ktKf5kWv2O/OgroXQOj1l0WFas2a71cnV0L5DTVbu5scnklx8zTs71Kax0R0pP+xFs9jvzqEWvdPYqLVm+27G6CGhttFP7mjih34eJgAceZ+y3QWPtIc0OaQQRuCO9fOtpoayjmo6mMSQTxujkYexzXDYj2FcJ6JGrEOWYzFiN4nDb7a4uGJznc6qBvY4f0mjYEeYHvO3e0Fb2tmn1w05zmrs1Sx7qKRzpbfUEcpoSeX3Q7CPFbl0LXba5Uo8aGoH4IUzdQMKxzO7E6z5JQNqoN+KN48mSF32THdoP4+/dcd0m0AuGnOrsORUV5huNkbBNG0SN4KhnENmggeS70jb0BBIRYHUT6wcg+Laj5tyzywOon1g5B8W1HzbkFYin50P/gHs322o+dcoBqfnQ/8AgHs322o+dcg66ojdP3928W/5af8AvNUuVEXp+/u7i3/LT/3moIws9+PSrWFVM3tCtZQFW1rsNtZswH/GKk/9wqyVVua9/DTmHxvP/fKDSUREBERAREQEREHottdWW2uhrrfVTUtVC4OjmieWvYfEEKSelPSpr7fTw23PaB9xjZs0XGlAE239NnIOPnG3r7VGREFleF6mYLmFM2Ww5LQTvcOdPJIIpm+mN2zvXtstuBDgCCCD2EKqdrnNcHNcWuB3BB2IWetWbZjagBbcpvVIB2CKtkbt7Cgstv8Ac6ey2KvvFWdqeippKiT+qxpcfxKr28V9RdbvWXSrdxVFZO+eV3i57i4/KVsdy1N1CudtmttwzK91VHOwslhlq3ua9p7QdzzC1JAREQEREBf2Nj5JGxxtc97iGta0bkk9gC/i92PXSWy3yiu8EFPPNRztnjjnaXRuc07jiAIJG/nQWJ6FYaMF0wtFika0VnVdfWkd8z/KcPPtyb9yt4UIWdK7UtvbQY2700kv61fr6bDUj/2zGvvWX9agm4ihM3pY6ij31qxs+inlH+YvoOlnn/fZceP/ANMv6aCYeVXeDH8Zud8qdjFQUslQ4b7cXA0nb17betVf3GrqLhcKmvq5DJUVMrppXn989xJJ9pK7FnnSPzPMMRr8brbbaKanrmCOWSnZIHhu4JA3cRz2XFkHqs9yr7Rc6e52yrlpKymeJIZonbOY4d4KmVof0krJkUNNZM2lhtF42Ebas+TTVLvEnsjcfPy37COQUK0QWrxSRyxtkie2Rjhu1zTuCPMV+lW1geqeeYS5rbBkNVFTN7aWYiWAjw4HbgekbFdGd0rtSyNhQ42POKSX9agm+sDqJ9YOQfFtR825Q8PSr1N/kuO/ecn6xeK89JrUi62qrttRFY2wVUL4ZOrpHA8LgQdiXnnsUHFFPzof/APZvttR865QDXYNNukHl2CYjS41arZZ56Wmc9zX1EcheeJxcd9nAd6CfKiJ0/f3fxYf/Fm/vtWCf0stQz7y0443008p/wAxc31c1QyHU2soKq/01ugfQxujiFJG5gIcQTvxOd4INGVq8TuKJjvFoKqoXdoulTqZHG1gpceIaABvRyfrEE41W7r78NWX/G0/94rorelfqUBzt2NH/pJf1q4vl19rMnye45BcGQsq7hUOqJmwtIYHOO52BJIHrQYtERAREQEREBERAREQEREBbhklsw+lxSgudsbffdVeZRC2oliLGdW8NPFwtBO4J7Fp6zN2udNVYvZLbFx9fRGoMu45eW8Fux7+QQbPjWG2uvsNjq56DJKye6zSxl9vja6ODhkDBuC07nnvtuFrdvsTJszNilqCYYqmSOaeLY/U49y9435e9aStisGoddYrLj9soK+vbR0xqG3SibK5sNTHK/m0tB2J4CRvtuDsR2LF4/ebRj1ff6yii92SSQPprX7pgDm8EjwHve09/VcbdvF/mQYzJ7O2z5TVWlkxmgZMPc8223Wwv2dHJ90xzXetbHm+CwY9keRW+GukqaS3Qmajn4QOvaJhEeLwIdxg7d7Vicsv1NfJLPXGGOGsp6ZtPVMhiDI9o3ERloH9DhH3K2G851brjQZjQTwzSNr66eps8xaA6JstQ2SSN/8ARIa123c4H7IoMXi2N2mqxcXy7Mu8kD651JJJQsa5tE1rGO62XcHcHj5DlvwO5rw4jZ7TXV93+ic9VJRW6ikqeKkLWvl4XsaNuIEAHi37FldPbzZrRDBWfshvOPXSmqC6WShiMra2A8J6sjjaAQQ4bHdpDufZz82LZcbFfsgvNtlqbZUVtJNHROpTwuhc+VjgARtsOEEckHmvuO0xrrGzHzWSR3pjTTQ1YaJWvMpj4SW8iCRyPLtXtuOP41I270Fkrq+e42iJ0rppQ3qKxsZ2lMYA4mAc3DcncA77HksK/KL7PlFJktwuVVcLnSzxzMnqpXSO3jcHNBJO+wI7Fn625YlQMvF0sVXXyVd0gfDDQzUwa2jbKfqgdJxHj2G7W7Ab77nbbZB48asdnqMZN2uVLe6t7q40rI7dweSAxrtzxNO559nJeS82q02DNq203OStqqCllcwupy2OY8t2g8QIDhuA4dxBC92L5vdcZx2Glsl0rqKqbczVSshlcyOaPq2tDXgHyhuCNj3FYPK5bZUZDWVNm64UM7+tjbKNnR8QDnMPM78LiW794G/egyeotpsdkyqqslldcX+4qiSnnkq3MPGWu2BaGgbDt7d1kNScdseOXC52yhocjE9FXSUoqqwMEEoY8tLhs0HntuOawucXSlvOb3e8UfH7mq62SePjGzuFziRuPFbPqrfbRkFfdrnQ5vfLg2rr5KmG21VI9kUTXvLgA4yuHkg7DZvsQeGx4vZn4rRXm7Ou3VV08sJq6SNrqegLSAOu5EkknfYFvk7EbnktLeOFxaCHAHbcdhW/YDf7FZaajrmX282Svpi5tfTUsJliukfEXNafLAbuD1Za4FuwDuZ3C0SpkbLUyysjETXvLmsHY0E9iD311sjp8ctl0bI8yVks8bmHsaI+Dbb08Z9izGG27Fa+13KW8C8ipoad1SfcskQY9oexob5TSQfL338y/dFJjFxw2hoLrfKy3VlDNUPayO39e2QScG3lcbdve+B7ViMduNPQUl5in4+Kst5p4uEb+V1kbufm2aUHsxu22Gtfe62vNyFut1MJ444XsEz+KeOJoJI4f4Tc8u5fHK7TbqKC3XKzVNTPbbhE50YqWBssT2O4Xxu4eR25EEdocOQO4X2wmqs0cF6t97r6igguNE2Fk8NN15Y5s8UvNvE3kRGR2969F7uGOSVVjs1DLXT2S3OPX1U0IjlnL3h0rhGHODRsA0DiJ8nc7b7APjlmMCyWOz17ZpJZauL/AExhA2glcxkrG+uKRh59/EO5a0t6vueNyG15BQXSgo6dlbOytpHUtM1rmzscWtDiO1vVPkb6eFaZMylbRwSRVEj6hxd10Ri2bGBtw7O38rfn3DbbvQfBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREH/9k=" alt="Cazan Transportes" style="height:44px;width:auto;mix-blend-mode:lighten;">
+    <div class="logo-badge">POP-023</div>
+  </div>
+  <div class="header-right">
+    Atendimento: Seg–Sex, 8h–18h<br>
+    <span style="color:var(--yellow)">(11) 2631-5063</span>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">🧠 Avaliação de Conhecimento</div>
+  <h1>QUIZ <span class="yellow">FILME</span><br>STRETCH</h1>
+  <p class="hero-sub">20 questões · Múltipla escolha · POP-023 | Paletização</p>
+</div>
+
+<!-- START -->
+<div id="startScreen">
+  <div class="start-card">
+    <div class="start-top">
+      <h2>Pronto para ser avaliado?</h2>
+      <p>Este quiz cobre todo o conteúdo do treinamento de utilização correta do filme stretch: preparação do pallet, técnica de aplicação, finalização, cuidados especiais, desperdícios e indicadores de controle.</p>
+    </div>
+    <div class="start-body">
+      <div class="start-stats">
+        <div class="ss-item"><div class="ss-val">20</div><div class="ss-lbl">Questões</div></div>
+        <div class="ss-item"><div class="ss-val">4</div><div class="ss-lbl">Opções</div></div>
+        <div class="ss-item"><div class="ss-val">70%</div><div class="ss-lbl">Para passar</div></div>
+      </div>
+      <div class="topics">
+        <div class="topic-item">Conceitos e definições do filme stretch</div>
+        <div class="topic-item">Preparação do pallet antes da aplicação</div>
+        <div class="topic-item">Técnica de fixação na base e aplicação do corpo</div>
+        <div class="topic-item">Quantidade recomendada de voltas por região</div>
+        <div class="topic-item">Finalização, travamento e inspeção</div>
+        <div class="topic-item">Cuidados especiais e armazenamento</div>
+        <div class="topic-item">Principais desperdícios e como evitá-los</div>
+        <div class="topic-item">Indicadores de controle e não conformidades</div>
+      </div>
+      <button class="btn-start" onclick="startQuiz()">INICIAR QUIZ →</button>
+    </div>
+  </div>
+</div>
+
+<!-- PROGRESS -->
+<div id="progressBar">
+  <div class="prog-bar-strip"><div class="prog-bar-fill" id="progFill" style="width:0%"></div></div>
+  <div class="prog-inner">
+    <span class="prog-label" id="progLabel">QUESTÃO 1 DE 20</span>
+    <div class="prog-right">
+      <span class="prog-score">Acertos: <strong id="progScore">0</strong></span>
+      <div class="prog-dots" id="progDots"></div>
+    </div>
+  </div>
+</div>
+
+<!-- QUESTION -->
+<div id="quizMain">
+  <div class="q-card">
+    <div class="q-top">
+      <div class="q-meta">
+        <span class="q-num" id="qNum">QUESTÃO 1</span>
+        <span class="q-cat" id="qCat">CATEGORIA</span>
+      </div>
+      <div class="q-text" id="qText"></div>
+    </div>
+    <div class="q-body">
+      <div class="options" id="opts"></div>
+      <div class="fb" id="feedback">
+        <div class="fb-icon" id="fbIcon"></div>
+        <div class="fb-txt" id="fbTxt"></div>
+      </div>
+    </div>
+    <div class="q-actions">
+      <button class="btn-check" id="btnCheck" disabled onclick="check()">CONFIRMAR</button>
+      <button class="btn-next" id="btnNext" onclick="next()">PRÓXIMA →</button>
+    </div>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div id="resultScreen">
+  <div class="result-card">
+    <span class="result-medal" id="rMedal"></span>
+    <div class="result-score" id="rScore"></div>
+    <div class="result-pct" id="rPct"></div>
+    <div class="result-msg" id="rMsg"></div>
+    <div class="result-stats">
+      <div class="rs-item ok-item"><div class="rs-val" id="rsOk">0</div><div class="rs-lbl">Corretas</div></div>
+      <div class="rs-item no-item"><div class="rs-val" id="rsNo">0</div><div class="rs-lbl">Incorretas</div></div>
+      <div class="rs-item pt-item"><div class="rs-val" id="rsPt">0%</div><div class="rs-lbl">Aproveitamento</div></div>
+    </div>
+    <button class="btn-restart" onclick="restart()">🔄 REFAZER O QUIZ</button>
+    <div class="review-wrap">
+      <div class="review-lbl">Revisão das Respostas</div>
+      <div id="reviewList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <strong>Cazan Transportes Ltda.</strong><br>
+  Av. Recife, 536 - Galpão J3 e J4 - Jardim Santo Afonso, Guarulhos - SP, 07215-030<br>
+  (11) 2631-5063 / 2631-5822 / 2631-5033 · atendimento.sp@cazantransportes.com.br
+</footer>
+
+<script>
+const Q = [
+  {
+    cat: "CONCEITOS",
+    q: "O que é o filme stretch, conforme definido no POP-023?",
+    opts: [
+      "Material plástico altamente elástico e resistente, utilizado para envolver e fixar cargas paletizadas",
+      "Fita adesiva reforçada para fechar caixas de papelão",
+      "Embalagem de bolhas de ar para proteger produtos frágeis",
+      "Película de alumínio usada para proteção térmica de cargas"
+    ],
+    c: 0,
+    exp: "O <strong>filme stretch</strong> é definido como material plástico altamente elástico e resistente, utilizado para envolver e fixar cargas paletizadas durante o transporte e armazenagem."
+  },
+  {
+    cat: "CONCEITOS",
+    q: "O que é 'tensionamento' na aplicação do filme stretch?",
+    opts: [
+      "O número total de voltas dadas ao redor do pallet",
+      "A força aplicada ao filme durante o enrolamento, garantindo aderência e firmeza sem causar rompimento",
+      "A velocidade de rotação ao envolver a carga",
+      "O percentual de sobreposição entre uma volta e a próxima"
+    ],
+    c: 1,
+    exp: "O <strong>tensionamento</strong> é a força aplicada ao filme durante o enrolamento, garantindo aderência e firmeza sem causar rompimento. É fundamental manter tensão constante durante toda a aplicação."
+  },
+  {
+    cat: "CONCEITOS",
+    q: "Qual é o percentual de sobreposição recomendado entre cada volta do filme stretch?",
+    opts: [
+      "25%",
+      "75%",
+      "50%",
+      "100%"
+    ],
+    c: 2,
+    exp: "A <strong>sobreposição recomendada é de aproximadamente 50%</strong> entre cada volta do filme. Isso garante cobertura uniforme da carga sem desperdício excessivo de material."
+  },
+  {
+    cat: "CONCEITOS",
+    q: "Qual é a fórmula para calcular o Índice de Avarias?",
+    opts: [
+      "(Total de pallets expedidos ÷ Pallets com avaria) x 100",
+      "(Pallets com avaria x Total de pallets expedidos) ÷ 100",
+      "(Retrabalhos ÷ Total de pallets expedidos) x 100",
+      "(Pallets com avaria ÷ Total de pallets expedidos) x 100"
+    ],
+    c: 3,
+    exp: "O <strong>Índice de Avarias</strong> é calculado pela fórmula: <strong>(Pallets com avaria ÷ Total de pallets expedidos) x 100</strong>. Esse indicador é acompanhado mensalmente pela gestão."
+  },
+  {
+    cat: "PREPARAÇÃO",
+    q: "Qual é o primeiro passo antes de iniciar a aplicação do filme stretch no pallet?",
+    opts: [
+      "Conferir se o pallet está em boas condições estruturais, sem danos ou rachaduras",
+      "Iniciar o enrolamento do filme pela parte superior da carga",
+      "Calcular o número de voltas necessárias para o corpo da carga",
+      "Escolher o rolo de stretch com a espessura adequada"
+    ],
+    c: 0,
+    exp: "Antes de qualquer aplicação, é obrigatório <strong>conferir se o pallet está em boas condições estruturais, sem danos ou rachaduras</strong>. Um pallet danificado compromete toda a estabilidade da carga."
+  },
+  {
+    cat: "PREPARAÇÃO",
+    q: "Como as cargas devem ser posicionadas sobre o pallet para garantir equilíbrio?",
+    opts: [
+      "As cargas mais leves devem ficar na parte inferior",
+      "As cargas mais pesadas devem ser posicionadas na parte inferior",
+      "A distribuição de peso não interfere na estabilidade com o uso do stretch",
+      "As cargas devem ser distribuídas alternando pesadas e leves em camadas"
+    ],
+    c: 1,
+    exp: "O procedimento determina que as <strong>cargas mais pesadas devem ser posicionadas na parte inferior</strong> do pallet para garantir equilíbrio e estabilidade durante o transporte."
+  },
+  {
+    cat: "PREPARAÇÃO",
+    q: "O que deve ser feito quando há itens cortantes ou pontiagudos na carga antes de aplicar o stretch?",
+    opts: [
+      "Aplicar mais camadas de stretch sobre esses pontos específicos",
+      "Ignorar, pois o stretch é resistente a cortes por definição",
+      "Proteger os pontos cortantes com papelão antes de aplicar o stretch",
+      "Remover os itens cortantes do pallet antes de iniciar"
+    ],
+    c: 2,
+    exp: "Quando há itens cortantes ou pontiagudos, o procedimento exige <strong>proteger esses pontos com papelão antes de aplicar o stretch</strong>, evitando rompimento do filme durante a embalagem."
+  },
+  {
+    cat: "PREPARAÇÃO",
+    q: "O que o POP-023 proíbe expressamente em relação a pallets desalinhados?",
+    opts: [
+      "Usar mais de 3 voltas na base quando o pallet estiver desalinhado",
+      "Mover o pallet com empilhadeira antes de aplicar o stretch",
+      "Adicionar papelão entre as caixas desalinhadas e o stretch",
+      "Usar stretch para corrigir pallet mal montado — a montagem deve ser corrigida antes"
+    ],
+    c: 3,
+    exp: "O POP-023 proíbe expressamente <strong>utilizar o stretch para 'corrigir' um pallet mal montado</strong>. A montagem deve ser corrigida ANTES de aplicar o filme, pois o stretch não substitui uma paletização adequada."
+  },
+  {
+    cat: "APLICAÇÃO",
+    q: "Em qual parte do pallet deve-se iniciar a aplicação do filme stretch?",
+    opts: [
+      "Na parte inferior do pallet, junto ao chão",
+      "Na parte superior, descendo em espiral",
+      "No centro da carga, para depois expandir para cima e para baixo",
+      "Em qualquer ponto, desde que a tensão seja mantida"
+    ],
+    c: 0,
+    exp: "A aplicação deve ser iniciada sempre na <strong>parte INFERIOR do pallet, junto ao chão</strong>. Isso garante a ancoragem da base, que é o ponto de partida obrigatório do processo."
+  },
+  {
+    cat: "APLICAÇÃO",
+    q: "Quantas voltas são recomendadas na BASE do pallet para garantir ancoragem firme?",
+    opts: [
+      "1 volta",
+      "2 a 3 voltas",
+      "4 a 5 voltas",
+      "6 ou mais voltas"
+    ],
+    c: 1,
+    exp: "A quantidade recomendada na <strong>base do pallet é de 2 a 3 voltas</strong>, suficientes para garantir ancoragem firme. Excesso de camadas na base desperdiça material sem adicionar segurança."
+  },
+  {
+    cat: "APLICAÇÃO",
+    q: "Como deve ser o movimento de aplicação do filme no corpo da carga?",
+    opts: [
+      "Horizontal, mantendo o filme no mesmo nível durante todas as voltas",
+      "Alternado: algumas voltas horizontais e outras diagonais",
+      "Espiral contínuo de baixo para cima, sem parar, com tensão constante",
+      "De cima para baixo em espiral, para garantir maior compressão"
+    ],
+    c: 2,
+    exp: "O corpo da carga deve ser coberto com <strong>movimento espiral contínuo de baixo para cima, sem parar</strong>, mantendo tensão constante e uniforme em todo o percurso."
+  },
+  {
+    cat: "APLICAÇÃO",
+    q: "Quantas voltas são recomendadas no TOPO da carga?",
+    opts: [
+      "1 volta — apenas para identificação visual do fim da embalagem",
+      "3 a 4 voltas — o topo é a área mais vulnerável",
+      "O mesmo número de voltas da base, sem definição específica",
+      "2 voltas — reforço superior obrigatório"
+    ],
+    c: 3,
+    exp: "O <strong>topo da carga requer 2 voltas de reforço superior obrigatório</strong>. Essa etapa não pode ser suprimida, pois o reforço no topo é essencial para a estabilidade durante o transporte."
+  },
+  {
+    cat: "APLICAÇÃO",
+    q: "Por que deve-se evitar excesso de voltas no centro da carga?",
+    opts: [
+      "Porque isso desperdiça material sem adicionar segurança à carga",
+      "Porque o centro é a região mais resistente e não precisa de reforço",
+      "Porque excesso de stretch no centro impede a ventilação dos produtos",
+      "Porque dificulta a leitura do código de barras das caixas"
+    ],
+    c: 0,
+    exp: "O POP-023 orienta a <strong>evitar excesso de voltas no centro</strong>, pois isso <strong>desperdiça material sem adicionar segurança</strong>. A cobertura deve ser contínua e homogênea, seguindo a quantidade recomendada."
+  },
+  {
+    cat: "FINALIZAÇÃO",
+    q: "Como deve ser finalizada a aplicação do filme stretch?",
+    opts: [
+      "Deixar a ponta do filme solta para facilitar a retirada posterior",
+      "Travar o filme cortando e prendendo a ponta, não deixar solto ou pendurado",
+      "Prender a ponta com fita adesiva por cima do stretch",
+      "Dar mais 5 voltas na base para travar o filme"
+    ],
+    c: 1,
+    exp: "A finalização correta exige <strong>travar o filme cortando e prendendo a ponta — não deixar solto ou pendurado</strong>. Filme pendurado é um desperdício identificado no POP e compromete a segurança da carga."
+  },
+  {
+    cat: "FINALIZAÇÃO",
+    q: "O que deve ser feito ao encontrar um ponto fraco ou área frouxa durante a inspeção visual?",
+    opts: [
+      "Aplicar stretch por cima da área frouxa para cobri-la rapidamente",
+      "Registrar a ocorrência e aguardar instrução do gestor",
+      "Refazer a área, sem aplicar stretch por cima sem fixar corretamente",
+      "Aceitar se a folga for menor que 10% da área total da carga"
+    ],
+    c: 2,
+    exp: "Se houver ponto fraco, o procedimento determina <strong>refazer a área corretamente — não aplicar stretch por cima sem fixar</strong>. Cobrir uma área frouxa com mais stretch não resolve o problema estrutural."
+  },
+  {
+    cat: "CUIDADOS ESPECIAIS",
+    q: "Como os rolos de stretch devem ser armazenados para evitar deformação?",
+    opts: [
+      "Na posição horizontal (deitados), empilhados com cuidado",
+      "Em qualquer posição, desde que não haja umidade no local",
+      "Dentro de caixas fechadas para proteger da luz e do calor",
+      "Na posição vertical (em pé), em local seco, fresco e protegido de luz solar"
+    ],
+    c: 3,
+    exp: "Os rolos devem ser mantidos na <strong>posição vertical (em pé)</strong> para evitar deformação, em <strong>local seco, fresco e protegido de luz solar direta</strong>. Também devem ser mantidos afastados de fontes de calor e produtos químicos."
+  },
+  {
+    cat: "CUIDADOS ESPECIAIS",
+    q: "Qual é o procedimento correto para embalar cargas irregulares com o filme stretch?",
+    opts: [
+      "Aplicar em cruzamento (horizontal e vertical) para reforçar a coesão",
+      "Usar stretch de maior espessura para compensar a irregularidade",
+      "Aumentar o número de voltas na base para estabilizar a irregularidade",
+      "Dividir a carga em dois pallets menores antes de aplicar o stretch"
+    ],
+    c: 0,
+    exp: "Para <strong>cargas irregulares</strong>, o procedimento recomenda <strong>aplicar em cruzamento (horizontal e vertical)</strong> para reforçar a coesão e garantir que toda a carga esteja bem unida."
+  },
+  {
+    cat: "DESPERDÍCIOS",
+    q: "Qual das situações abaixo NÃO é considerada um desperdício a ser eliminado conforme o POP-023?",
+    opts: [
+      "Aplicar stretch em pallet desalinhado",
+      "Fazer 2 voltas de reforço no topo da carga",
+      "Rasgar e reiniciar o filme várias vezes durante a aplicação",
+      "Deixar o filme pendurado solto após a finalização"
+    ],
+    c: 1,
+    exp: "Dar <strong>2 voltas de reforço no topo</strong> é um procedimento <strong>obrigatório e correto</strong>, não um desperdício. Os desperdícios a eliminar incluem: excesso de voltas sem necessidade, stretch frouxo, aplicação em pallets desalinhados, rasgar e reiniciar várias vezes e filme pendurado solto."
+  },
+  {
+    cat: "DESPERDÍCIOS",
+    q: "Como evitar o desperdício causado pelo filme frouxo sem tensão?",
+    opts: [
+      "Usar um rolo de stretch mais espesso",
+      "Adicionar mais voltas sobre as áreas frouxas no final",
+      "Manter tensão constante durante toda a aplicação",
+      "Iniciar a aplicação a partir do topo para criar mais pressão"
+    ],
+    c: 2,
+    exp: "O desperdício de <strong>stretch frouxo sem tensão</strong> é evitado <strong>mantendo tensão constante durante toda a aplicação</strong>. Stretch sem tensão não une a carga, gera retrabalho e desperdiça material."
+  },
+  {
+    cat: "INDICADORES",
+    q: "O que pode ocorrer com um colaborador que não cumprir os procedimentos do POP-023?",
+    opts: [
+      "Apenas registro informal no prontuário, sem consequências formais",
+      "Desconto automático no salário equivalente ao valor do material desperdiçado",
+      "Transferência imediata para outro setor operacional",
+      "Orientação e retreinamento imediato, advertência formal e possível restrição de atividade até regularização"
+    ],
+    c: 3,
+    exp: "O não cumprimento do POP-023 pode resultar em: <strong>orientação e retreinamento imediato</strong>, <strong>advertência formal</strong> conforme política da empresa e <strong>restrição de atividade até regularização</strong>."
+  }
+];
+
+let questions=[], cur=0, sel=null, answered=false, score=0, results=[];
+
+function shuffle(arr){let a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+function startQuiz(){
+  questions=shuffle(Q);
+  cur=0;sel=null;answered=false;score=0;results=[];
+  document.getElementById('startScreen').style.display='none';
+  document.getElementById('progressBar').style.display='block';
+  document.getElementById('quizMain').style.display='block';
+  buildDots();render();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function buildDots(){
+  const w=document.getElementById('progDots');w.innerHTML='';
+  questions.forEach((_,i)=>{
+    const d=document.createElement('div');d.className='prog-dot';d.id='dot'+i;w.appendChild(d);
+  });
+}
+
+function render(){
+  const q=questions[cur];
+  document.getElementById('qNum').textContent=`QUESTÃO ${cur+1}`;
+  document.getElementById('qCat').textContent=q.cat;
+  document.getElementById('qText').textContent=q.q;
+  document.getElementById('progLabel').textContent=`QUESTÃO ${cur+1} DE ${questions.length}`;
+  document.getElementById('progScore').textContent=score;
+  document.getElementById('progFill').style.width=`${(cur/questions.length)*100}%`;
+  questions.forEach((_,i)=>{
+    const d=document.getElementById('dot'+i);
+    d.className='prog-dot'+(i===cur?' cur':'');
+  });
+  const wrap=document.getElementById('opts');wrap.innerHTML='';
+  ['A','B','C','D'].forEach((l,i)=>{
+    const div=document.createElement('div');div.className='opt';
+    div.innerHTML=`<div class="opt-let">${l}</div><div class="opt-txt">${q.opts[i]}</div>`;
+    div.onclick=()=>pick(i);wrap.appendChild(div);
+  });
+  sel=null;answered=false;
+  document.getElementById('feedback').className='fb';
+  document.getElementById('btnCheck').disabled=true;
+  document.getElementById('btnCheck').style.display='';
+  document.getElementById('btnNext').className='btn-next';
+}
+
+function pick(idx){
+  if(answered)return;sel=idx;
+  document.querySelectorAll('.opt').forEach((el,i)=>el.classList.toggle('sel',i===idx));
+  document.getElementById('btnCheck').disabled=false;
+}
+
+function check(){
+  if(sel===null||answered)return;
+  answered=true;const q=questions[cur];const ok=sel===q.c;
+  if(ok)score++;
+  results.push({q:q.q,sel,correct:q.c,opts:q.opts,ok,cat:q.cat});
+  document.querySelectorAll('.opt').forEach((el,i)=>{
+    el.classList.add('disabled');
+    if(i===q.c)el.classList.add('correct');
+    else if(i===sel&&!ok)el.classList.add('wrong');
+    else if(i!==sel)el.classList.add('reveal');
+  });
+  const d=document.getElementById('dot'+cur);
+  d.className='prog-dot '+(ok?'ok':'no');
+  document.getElementById('fbIcon').textContent=ok?'✅':'❌';
+  document.getElementById('fbTxt').innerHTML=`<strong>${ok?'Correto!':'Incorreto.'}</strong> ${q.exp}`;
+  document.getElementById('feedback').className='fb show '+(ok?'fb-ok':'fb-no');
+  document.getElementById('btnCheck').style.display='none';
+  document.getElementById('progScore').textContent=score;
+  const bn=document.getElementById('btnNext');
+  bn.className='btn-next show';
+  bn.textContent=cur<questions.length-1?'PRÓXIMA →':'VER RESULTADO →';
+}
+
+function next(){
+  cur++;
+  if(cur>=questions.length)showResult();
+  else{render();window.scrollTo({top:0,behavior:'smooth'});}
+}
+
+function showResult(){
+  document.getElementById('quizMain').style.display='none';
+  document.getElementById('progFill').style.width='100%';
+  const rs=document.getElementById('resultScreen');
+  rs.style.display='block';rs.scrollIntoView({behavior:'smooth'});
+  const pct=Math.round((score/questions.length)*100);
+  const passed=pct>=70;
+  let medal,msg;
+  if(pct>=96){medal='🏆';msg='Excelente! Você domina completamente o procedimento de utilização do filme stretch da Cazan Transportes.';}
+  else if(pct>=80){medal='🎯';msg='Muito bem! Você tem sólido entendimento do processo. Revise os pontos incorretos e continue praticando.';}
+  else if(pct>=70){medal='✅';msg='Aprovado! Bom domínio do conteúdo. Continue praticando para solidificar todo o conhecimento.';}
+  else if(pct>=50){medal='📚';msg='Continue estudando! Revise o POP-023 com atenção e tente novamente quando estiver pronto.';}
+  else{medal='💪';msg='Não desanime! Leia o POP-023 com calma, anote os pontos principais e refaça o quiz.';}
+  document.getElementById('rMedal').textContent=medal;
+  document.getElementById('rScore').textContent=`${score}/${questions.length}`;
+  document.getElementById('rPct').innerHTML=`${pct}% de aproveitamento — <span class="${passed?'result-status-ok':'result-status-no'}">${passed?'✅ APROVADO':'❌ ABAIXO DO MÍNIMO (70%)'}</span>`;
+  document.getElementById('rMsg').textContent=msg;
+  document.getElementById('rsOk').textContent=score;
+  document.getElementById('rsNo').textContent=questions.length-score;
+  document.getElementById('rsPt').textContent=pct+'%';
+  const letters=['A','B','C','D'];
+  const rl=document.getElementById('reviewList');rl.innerHTML='';
+  results.forEach((r,i)=>{
+    const div=document.createElement('div');div.className=`rev-item ${r.ok?'ok':'no'}`;
+    div.innerHTML=`<div class="rev-cat">${r.cat}</div>
+    <div class="rev-q">${i+1}. ${r.q}</div>
+    <div class="rev-a">Sua resposta: <span class="${r.ok?'rev-ok':'rev-no'}">${r.ok?'✓':'✕'} ${letters[r.sel]}. ${r.opts[r.sel]}</span>
+    ${!r.ok?`<br>Correta: <span class="rev-ok">✓ ${letters[r.correct]}. ${r.opts[r.correct]}</span>`:''}</div>`;
+    rl.appendChild(div);
+  });
+}
+
+function restart(){
+  document.getElementById('resultScreen').style.display='none';
+  document.getElementById('progressBar').style.display='none';
+  document.getElementById('startScreen').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
